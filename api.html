@@ -1,129 +1,354 @@
-<!DOCTYPE html>  <html> <head>   <title>api.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="customconfig.html">                 customconfig.js               </a>                                           <a class="source" href="default-action.html">                 default-action.js               </a>                                           <a class="source" href="oauth.html">                 oauth.js               </a>                                           <a class="source" href="simpleclient.html">                 simpleclient.js               </a>                                           <a class="source" href="trackpreview.html">                 trackpreview.js               </a>                                           <a class="source" href="two-legged.html">                 two-legged.js               </a>                                           <a class="source" href="api.html">                 api.js               </a>                                           <a class="source" href="helpers.html">                 helpers.js               </a>                                           <a class="source" href="logger.html">                 logger.js               </a>                                           <a class="source" href="oauth-helper.html">                 oauth-helper.js               </a>                                           <a class="source" href="request.html">                 request.js               </a>                                           <a class="source" href="resource.html">                 resource.js               </a>                                           <a class="source" href="responseparser.html">                 responseparser.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               api.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span> <span class="nx">Resource</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./resource&#39;</span><span class="p">),</span>
-	<span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">),</span>
-	<span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">),</span>
-	<span class="nx">capitalize</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./helpers&#39;</span><span class="p">).</span><span class="nx">capitalize</span><span class="p">,</span>
-	<span class="nx">underscore</span> <span class="o">=</span>  <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;underscore&#39;</span><span class="p">),</span>
-	<span class="nx">api</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>API</p>
+<!DOCTYPE html>
 
+<html>
+<head>
+  <title>api.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>api.js</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="customconfig.html">
+                    customconfig.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="default-action.html">
+                    default-action.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="oauth.html">
+                    oauth.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="simpleclient.html">
+                    simpleclient.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="two-legged.html">
+                    two-legged.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="user-authentication.html">
+                    user-authentication.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="user-locker.html">
+                    user-locker.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="user-management.html">
+                    user-management.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="api.html">
+                    api.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="cleaners.html">
+                    cleaners.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="errors.html">
+                    errors.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="helpers.html">
+                    helpers.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="logger.html">
+                    logger.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="oauth.html">
+                    oauth.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="parameters.html">
+                    parameters.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="request.html">
+                    request.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="resource.html">
+                    resource.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="responseparser.html">
+                    responseparser.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;
+
+<span class="hljs-keyword">var</span> Resource = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./resource'</span>);
+<span class="hljs-keyword">var</span> OAuth = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./oauth'</span>).OAuth;
+<span class="hljs-keyword">var</span> helpers = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./helpers'</span>);
+<span class="hljs-keyword">var</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../config'</span>);
+<span class="hljs-keyword">var</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'util'</span>);
+<span class="hljs-keyword">var</span> capitalize = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./helpers'</span>).capitalize;
+<span class="hljs-keyword">var</span> _ =  <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>);
+<span class="hljs-keyword">var</span> api;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">configureSchemaFromEnv</span><span class="hljs-params">(schema)</span> </span>{
+	<span class="hljs-keyword">var</span> port;
+
+	<span class="hljs-keyword">if</span> (process.env[ <span class="hljs-string">'_7D_API_CLIENT_HOST'</span>]) {
+		schema.host = process.env[<span class="hljs-string">'_7D_API_CLIENT_HOST'</span>];
+	}
+
+	<span class="hljs-keyword">if</span> (process.env[ <span class="hljs-string">'_7D_API_CLIENT_SSL_HOST'</span>]) {
+		schema.sslHost = process.env[<span class="hljs-string">'_7D_API_CLIENT_SSL_HOST'</span>];
+	}
+
+	<span class="hljs-keyword">if</span> (process.env[<span class="hljs-string">'_7D_API_CLIENT_PORT'</span>]) {
+		port = <span class="hljs-built_in">Number</span>(process.env[<span class="hljs-string">'_7D_API_CLIENT_PORT'</span>]);
+		<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">isNaN</span>(port)) {
+			schema.port = port;
+		}
+	}
+
+	<span class="hljs-keyword">if</span> (process.env[<span class="hljs-string">'_7D_API_CLIENT_PREFIX'</span>]) {
+		<span class="hljs-keyword">if</span> (process.env[<span class="hljs-string">'_7D_API_CLIENT_PREFIX'</span>].toLowerCase() === <span class="hljs-string">'empty'</span>) {
+			schema.prefix = <span class="hljs-string">''</span>;
+		} <span class="hljs-keyword">else</span> {
+			schema.prefix = process.env[<span class="hljs-string">'_7D_API_CLIENT_PREFIX'</span>];
+		}
+	}
+}</pre></div>
+        
+      
+        
+        <p>API</p>
 <p>Creates a new API wrapper from a schema definition</p>
-
-<p>The options parameter should have the following properties:</p>
-
 <ul>
-<li><code>schema</code> the API schema definition</li>
-<li><code>consumerkey</code> your application's oauth consumer key</li>
-<li><code>consumersecret</code> your application's oauth consumer secret</li>
-<li><code>format</code> the response format</li>
-<li><p><code>logger</code> a logger instance for output</p></li>
-<li><p>@constructor</p></li>
+<li>@param {Object} options - The API options, see below</li>
+<li><p>@param {Object} schema - The definition of the api resources and actions
+see the assets/7digital-api-schema json file.</p>
+</li>
+<li><p>@constructor</p>
+</li>
 <li>@param {Object} options</li>
-</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">Api</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">prop</span><span class="p">,</span> <span class="nx">resourceOptions</span><span class="p">,</span> <span class="nx">resourceConstructor</span><span class="p">;</span>
-
-	<span class="k">this</span><span class="p">.</span><span class="nx">schema</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">schema</span><span class="p">;</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">format</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">format</span><span class="p">;</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">logger</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">logger</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Creates a no-op constrctor with the pre-built resource as its prototype
-this is syntactic sugar to allow callers to new up the resources.</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="kd">function</span> <span class="nx">createResourceConstructor</span><span class="p">(</span><span class="nx">resourcePrototype</span><span class="p">)</span> <span class="p">{</span>
-		<span class="kd">function</span> <span class="nx">APIResource</span><span class="p">()</span> <span class="p">{</span>
-		<span class="p">}</span>
-
-		<span class="nx">APIResource</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">resourcePrototype</span><span class="p">;</span>
-		<span class="k">return</span> <span class="nx">APIResource</span><span class="p">;</span>
-	<span class="p">}</span>
-
-	<span class="k">for</span> <span class="p">(</span><span class="nx">prop</span> <span class="k">in</span> <span class="nx">options</span><span class="p">.</span><span class="nx">schema</span><span class="p">.</span><span class="nx">resources</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">schema</span><span class="p">.</span><span class="nx">resources</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">prop</span><span class="p">))</span> <span class="p">{</span>
-			<span class="nx">resourceOptions</span> <span class="o">=</span> <span class="nx">options</span><span class="p">;</span>
-			<span class="nx">resourceOptions</span><span class="p">.</span><span class="nx">resourceDefinition</span> <span class="o">=</span>
-				<span class="nx">options</span><span class="p">.</span><span class="nx">schema</span><span class="p">.</span><span class="nx">resources</span><span class="p">[</span><span class="nx">prop</span><span class="p">];</span>
-
-			<span class="k">this</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="o">=</span> <span class="nx">createResourceConstructor</span><span class="p">(</span>
-				<span class="k">new</span> <span class="nx">Resource</span><span class="p">(</span><span class="nx">resourceOptions</span><span class="p">));</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Gets the schema JSON document used to construct the API
-wrapper</p>
-
+</ul>
+<p>The options parameter should have the following properties:</p>
 <ul>
-<li>@return {String}</li>
-</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Api</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getSchema</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">schema</span><span class="p">;</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Gets the classname for a given resource on the API. In conjunction
-with <code>getActionMethodName</code> this allows you to translate an API
-URL into a method call on the wrapper.</p>
+<li><code>consumerkey</code> your application’s oauth consumer key</li>
+<li><code>consumersecret</code> your application’s oauth consumer secret</li>
+<li><code>format</code> the response format</li>
+<li><code>logger</code> a logger instance for output</li>
+</ul>
 
-<p>I.E. Given a path of artist/details, you can resolve the class name for
-the artist component.</p>
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Api</span><span class="hljs-params">(options, schema)</span> </span>{
+	<span class="hljs-keyword">var</span> prop, resourceOptions, resourceConstructor;
+	<span class="hljs-keyword">var</span> apiRoot = <span class="hljs-keyword">this</span>;</pre></div>
+        
+      
+        
+        <p>Set default options for any unsupplied overrides</p>
 
+        
+          <div class='highlight'><pre>	_.defaults(options, config);
+	<span class="hljs-keyword">this</span>.options = options;
+	<span class="hljs-keyword">this</span>.schema = schema;
+
+	configureSchemaFromEnv(<span class="hljs-keyword">this</span>.schema);</pre></div>
+        
+      
+        
+        <p>Creates a constructor with the pre-built resource as its prototype
+this is syntactic sugar to allow callers to new up the resources.</p>
+
+        
+          <div class='highlight'><pre>	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createResourceConstructor</span><span class="hljs-params">(resourcePrototype)</span> </span>{
+		<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">APIResource</span><span class="hljs-params">(resourceOptions)</span> </span>{</pre></div>
+        
+      
+        
+        <p>Allow creating resources without <code>new</code> keyword</p>
+
+        
+          <div class='highlight'><pre>			<span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> APIResource)) {
+				<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> APIResource(resourceOptions);
+			}
+
+			resourceOptions = resourceOptions || {};</pre></div>
+        
+      
+        
+        <p>Override any default options for all requests on this resource</p>
+
+        
+          <div class='highlight'><pre>			_.defaults(resourceOptions.defaultParams,
+				apiRoot.options.defaultParams);
+			_.defaults(resourceOptions.headers,
+				apiRoot.options.headers);
+			_.defaults(resourceOptions, apiRoot.options);
+
+			<span class="hljs-keyword">this</span>.format = resourceOptions.format;
+			<span class="hljs-keyword">this</span>.logger = resourceOptions.logger;
+			<span class="hljs-keyword">this</span>.defaultParams = resourceOptions.defaultParams;
+			<span class="hljs-keyword">this</span>.headers = resourceOptions.headers;
+		}
+
+		APIResource.prototype = resourcePrototype;
+		<span class="hljs-keyword">return</span> APIResource;
+	}
+
+	<span class="hljs-keyword">for</span> (prop <span class="hljs-keyword">in</span> schema.resources) {
+		<span class="hljs-keyword">if</span> (schema.resources.hasOwnProperty(prop)) {
+			resourceOptions = options;
+			resourceOptions.api = <span class="hljs-keyword">this</span>;
+			resourceOptions.resourceDefinition =
+				schema.resources[prop];
+
+			<span class="hljs-keyword">this</span>[prop] = createResourceConstructor(
+				<span class="hljs-keyword">new</span> Resource(resourceOptions, schema));
+		}
+	}
+
+	<span class="hljs-keyword">this</span>[<span class="hljs-string">'OAuth'</span>] = createResourceConstructor(<span class="hljs-keyword">new</span> OAuth(options));
+}</pre></div>
+        
+      
+        
+        <p>Creates a new client with additional / replacement options.</p>
 <ul>
-<li>@param {String} - the name of the resource</li>
-<li>@return {String} - the class name</li>
-</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Api</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getResourceClassName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">resource</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">resourceName</span> <span class="k">in</span> <span class="k">this</span><span class="p">.</span><span class="nx">schema</span><span class="p">.</span><span class="nx">resources</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">schema</span><span class="p">.</span><span class="nx">resources</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">resourceName</span><span class="p">))</span> <span class="p">{</span>
-			<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">schema</span><span class="p">.</span><span class="nx">resources</span><span class="p">[</span><span class="nx">resourceName</span><span class="p">].</span><span class="nx">resource</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span>
-				<span class="nx">resource</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span> <span class="p">{</span>
-				<span class="k">return</span> <span class="nx">resourceName</span><span class="p">;</span>
-			<span class="p">}</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
+<li>@param {Object} newOptions - the overriden or additional options for the
+new client</li>
+<li>@return {Api} - a new api instance with the merged options</li>
+</ul>
 
-	<span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Gets the method name for a call to the wrapper given the resource class name.
-See <code>getActionMethodName</code> above for resolving class names.</p>
+        
+          <div class='highlight'><pre>Api.prototype.reconfigure = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">reconfigure</span><span class="hljs-params">(newOptions)</span> </span>{
+	<span class="hljs-keyword">var</span> mergedDefaultParams = _.extend({}, <span class="hljs-keyword">this</span>.options.defaultParams,
+		newOptions.defaultParams);
+	<span class="hljs-keyword">var</span> mergedHeaders = _.extend({}, <span class="hljs-keyword">this</span>.options.headers,
+		newOptions.headers);
+	<span class="hljs-keyword">var</span> mergedOptions = _.extend({}, <span class="hljs-keyword">this</span>.options, newOptions);
 
+	mergedOptions.defaultParams = mergedDefaultParams;
+	mergedOptions.headers = mergedHeaders;
+
+	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Api(mergedOptions, <span class="hljs-keyword">this</span>.schema);
+};</pre></div>
+        
+      
+        
+        <p>Factory method for creating an API wrapper from a JSON schema definition.</p>
 <ul>
-<li>@param {String} resourceClassName</li>
-<li>@param {String} action - the path component of the path</li>
-<li>@return {String} - the method name on the wrapper</li>
-</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Api</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getActionMethodName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">resourceClassName</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">actionMethodName</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
-
-	<span class="k">this</span><span class="p">.</span><span class="nx">schema</span><span class="p">.</span><span class="nx">resources</span><span class="p">[</span><span class="nx">resourceClassName</span><span class="p">].</span><span class="nx">actions</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">act</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="nx">underscore</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">act</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">act</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span> <span class="nx">action</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span> <span class="p">{</span>
-			<span class="nx">actionMethodName</span> <span class="o">=</span> <span class="s1">&#39;get&#39;</span> <span class="o">+</span> <span class="nx">capitalize</span><span class="p">(</span><span class="nx">act</span><span class="p">);</span>
-		<span class="p">}</span>
-		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">act</span><span class="p">.</span><span class="nx">apiCall</span> <span class="o">&amp;&amp;</span> <span class="nx">act</span><span class="p">.</span><span class="nx">apiCall</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">===</span>
-					<span class="nx">action</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span> <span class="p">{</span>
-			<span class="nx">actionMethodName</span> <span class="o">=</span> <span class="nx">act</span><span class="p">.</span><span class="nx">methodName</span><span class="p">;</span>
-		<span class="p">}</span>
-		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">act</span><span class="p">.</span><span class="nx">apiCall</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">action</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">actionMethodName</span> <span class="o">=</span> <span class="nx">act</span><span class="p">.</span><span class="nx">methodName</span><span class="p">;</span>
-		<span class="p">}</span>
-	<span class="p">});</span>
-
-	<span class="k">return</span> <span class="nx">actionMethodName</span><span class="p">;</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Factory method for creating an API wrapper from a JSON schema definition.</p>
-
+<li>@param {Object} options - The API options, see below</li>
+<li>@param {Object} schema - The definition of the api resources and actions
+see the assets/7digital-api-schema json file.</li>
+</ul>
 <p>The <code>options</code> argument can contain the following properties:</p>
-
 <ul>
-<li><em>schema</em> - A JSON string containing the schema definition for the API</li>
 <li><em>consumerkey</em> - The OAuth consumer key for your application</li>
 <li><em>consumersecret</em> - The OAuth consumer secret for your application</li>
 <li><em>format</em> - The format of responses you would like to receive</li>
 <li><em>logger</em> - An instance of a logger for output from the wrapper</li>
-</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Api</span><span class="p">.</span><span class="nx">build</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="k">new</span> <span class="nx">Api</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
-<span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Factory method for creating an API wrapper from a file</p>
+</ul>
 
-<p>The <code>options</code> argument can contain the following properties:</p>
+        
+          <div class='highlight'><pre>Api.build = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">build</span><span class="hljs-params">(options, schema)</span> </span>{
+	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Api(options, schema);
+};</pre></div>
+        
+      
+        
+        <p>Factory method for creating an API wrapper using defaults.
+We need a separate method with an inlined schemapath so that
+browserify can do the right thing for non-node environments.</p>
 
-<ul>
-<li><em>schemapath</em> - A path to a file containing the JSON schema definition
-             for the API</li>
-<li><em>consumerkey</em> - The OAuth consumer key for your application</li>
-<li><em>consumersecret</em> - The OAuth consumer secret for your application</li>
-<li><em>format</em> - The format of responses you would like to receive</li>
-<li><em>logger</em> - An instance of a logger for output from the wrapper</li>
-</ul>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">Api</span><span class="p">.</span><span class="nx">buildFromFile</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Blocking here but we should only ever do this once and the library is
-unusable until it has read the schema.</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="kd">var</span> <span class="nx">schemaText</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">schemapath</span><span class="p">);</span>
+        
+          <div class='highlight'><pre>Api.buildDefault = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">buildDefault</span><span class="hljs-params">(options)</span> </span>{
+	options = options || config;
+	<span class="hljs-keyword">var</span> schema = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../assets/7digital-api-schema.json'</span>);
+	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Api(options, schema);
+};
 
-	<span class="nx">options</span><span class="p">.</span><span class="nx">schema</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">schemaText</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
-
-	<span class="k">return</span> <span class="k">new</span> <span class="nx">Api</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="nx">exports</span><span class="p">.</span><span class="nx">Api</span> <span class="o">=</span> <span class="nx">Api</span><span class="p">;</span>
-
-</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
+<span class="hljs-built_in">module</span>.exports.Api = Api;</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

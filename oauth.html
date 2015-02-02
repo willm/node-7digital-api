@@ -1,60 +1,440 @@
-<!DOCTYPE html>  <html> <head>   <title>oauth.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="customconfig.html">                 customconfig.js               </a>                                           <a class="source" href="default-action.html">                 default-action.js               </a>                                           <a class="source" href="oauth.html">                 oauth.js               </a>                                           <a class="source" href="simpleclient.html">                 simpleclient.js               </a>                                           <a class="source" href="trackpreview.html">                 trackpreview.js               </a>                                           <a class="source" href="two-legged.html">                 two-legged.js               </a>                                           <a class="source" href="api.html">                 api.js               </a>                                           <a class="source" href="helpers.html">                 helpers.js               </a>                                           <a class="source" href="logger.html">                 logger.js               </a>                                           <a class="source" href="oauth-helper.html">                 oauth-helper.js               </a>                                           <a class="source" href="request.html">                 request.js               </a>                                           <a class="source" href="resource.html">                 resource.js               </a>                                           <a class="source" href="responseparser.html">                 responseparser.js               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               oauth.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>Module dependencies</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">var</span>
-	<span class="nx">step</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">),</span>
-	<span class="nx">readline</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;readline&#39;</span><span class="p">),</span>
-	<span class="nx">oauthHelper</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/oauth-helper&#39;</span><span class="p">),</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Create a readline interface for prompting the user</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">consoleInterface</span> <span class="o">=</span> <span class="nx">readline</span><span class="p">.</span><span class="nx">createInterface</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">,</span> <span class="nx">process</span><span class="p">.</span><span class="nx">stdout</span><span class="p">),</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Consumer key and secret</p>             </td>             <td class="code">               <div class="highlight"><pre>	<span class="nx">consumerkey</span> <span class="o">=</span> <span class="s1">&#39;YOUR_KEY_HERE&#39;</span><span class="p">,</span>
-	<span class="nx">consumersecret</span> <span class="o">=</span> <span class="s1">&#39;YOUR_SECRET_HERE&#39;</span><span class="p">;</span>
+<!DOCTYPE html>
 
-<span class="nx">step</span><span class="p">(</span>
-	<span class="kd">function</span> <span class="nx">getRequestToken</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Get a request token using the oauth helper</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">oauthHelper</span><span class="p">.</span><span class="nx">getRequestToken</span><span class="p">({</span>
-			<span class="nx">oauthkey</span><span class="o">:</span> <span class="nx">consumerkey</span><span class="p">,</span>
-			<span class="nx">oauthsecret</span><span class="o">:</span> <span class="nx">consumersecret</span><span class="p">,</span>
-			<span class="nx">callbackUrl</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
-		<span class="p">},</span> <span class="k">this</span><span class="p">);</span>
-	<span class="p">},</span>
-	<span class="kd">function</span> <span class="nx">authorise</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">requestToken</span><span class="p">,</span> <span class="nx">requestSecret</span><span class="p">,</span> <span class="nx">authoriseUrl</span><span class="p">)</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Throw the error if there is one</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error getting the request token&#39;</span><span class="p">);</span>
-			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-		<span class="p">}</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Show the authorise url</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;Authorise here: %s&#39;</span><span class="p">,</span> <span class="nx">authoriseUrl</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Remember the token and secret so we can access it after the
-user presses enter</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="k">this</span><span class="p">.</span><span class="nx">requestToken</span> <span class="o">=</span> <span class="nx">requestToken</span><span class="p">;</span>
-		<span class="k">this</span><span class="p">.</span><span class="nx">requestSecret</span> <span class="o">=</span> <span class="nx">requestSecret</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Tell the user to visit the authorise url</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">consoleInterface</span><span class="p">.</span><span class="nx">question</span><span class="p">(</span><span class="s1">&#39;Visit the link to authorise this&#39;</span> <span class="o">+</span>
-									<span class="s1">&#39; application to access your 7digital&#39;</span> <span class="o">+</span>
-									<span class="s1">&#39;account.  Press enter to continue&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-	<span class="p">},</span>
-	<span class="kd">function</span> <span class="nx">continueAfterAuthorisation</span><span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Get an access token using the oauth helper using the authorised
-request token and secret</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">oauthHelper</span><span class="p">.</span><span class="nx">getAccessToken</span><span class="p">({</span>
-				<span class="nx">oauthkey</span><span class="o">:</span> <span class="nx">consumerkey</span><span class="p">,</span>
-				<span class="nx">oauthsecret</span><span class="o">:</span> <span class="nx">consumersecret</span><span class="p">,</span>
-				<span class="nx">requesttoken</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">requestToken</span><span class="p">,</span>
-				<span class="nx">requestsecret</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">requestSecret</span>
-			<span class="p">},</span> <span class="k">this</span><span class="p">);</span>
-	<span class="p">},</span>
-	<span class="kd">function</span> <span class="nx">logTheAccessToken</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">accesstoken</span><span class="p">,</span> <span class="nx">accesssecret</span><span class="p">)</span> <span class="p">{</span>
-		<span class="kd">var</span> <span class="nx">api</span><span class="p">,</span> <span class="nx">user</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Log any error</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error getting the access token&#39;</span><span class="p">);</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">err</span><span class="p">));</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Close the readline interface properly so that the process
-ends cleanly otherwise it will hang.</p>             </td>             <td class="code">               <div class="highlight"><pre>			<span class="nx">consoleInterface</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-			<span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
-			<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-		<span class="p">}</span>
+<html>
+<head>
+  <title>oauth.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
 
-		<span class="nx">api</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../index&#39;</span><span class="p">).</span><span class="nx">configure</span><span class="p">({</span>
-			<span class="nx">consumerkey</span><span class="o">:</span> <span class="nx">consumerkey</span><span class="p">,</span>
-			<span class="nx">consumersecret</span><span class="o">:</span> <span class="nx">consumersecret</span>
-		<span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>Write the token and secret out to the commandline</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;Access Token: %s&#39;</span><span class="p">,</span> <span class="nx">accesstoken</span><span class="p">);</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;Access Secret: %s&#39;</span><span class="p">,</span> <span class="nx">accesssecret</span><span class="p">);</span>
-		<span class="nx">user</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">api</span><span class="p">.</span><span class="nx">User</span><span class="p">();</span>
-		<span class="nx">user</span><span class="p">.</span><span class="nx">getLocker</span><span class="p">({</span>
-			<span class="nx">accesstoken</span><span class="o">:</span> <span class="nx">accesstoken</span><span class="p">,</span>
-			<span class="nx">accesssecret</span><span class="o">:</span> <span class="nx">accesssecret</span>
-		<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;!!!ERROR!!!&#39;</span><span class="p">);</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;!!!RESULT!!!&#39;</span><span class="p">);</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-		<span class="p">});</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>Close the readline interface properly so that the process
-ends cleanly otherwise it will hang.</p>             </td>             <td class="code">               <div class="highlight"><pre>		<span class="nx">consoleInterface</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
-		<span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
-	<span class="p">}</span>
-<span class="p">);</span>
+      <div class="header">
+        
+          <h1>oauth.js</h1>
+        
 
-</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="customconfig.html">
+                    customconfig.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="default-action.html">
+                    default-action.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="oauth.html">
+                    oauth.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="simpleclient.html">
+                    simpleclient.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="two-legged.html">
+                    two-legged.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="user-authentication.html">
+                    user-authentication.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="user-locker.html">
+                    user-locker.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="user-management.html">
+                    user-management.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="api.html">
+                    api.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="cleaners.html">
+                    cleaners.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="errors.html">
+                    errors.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="helpers.html">
+                    helpers.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="logger.html">
+                    logger.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="oauth.html">
+                    oauth.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="parameters.html">
+                    parameters.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="request.html">
+                    request.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="resource.html">
+                    resource.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="responseparser.html">
+                    responseparser.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre><span class="hljs-pi">'use strict'</span>;
+
+<span class="hljs-keyword">var</span> qs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'querystring'</span>);
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'lodash'</span>);
+<span class="hljs-keyword">var</span> OAuthClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'oauth'</span>).OAuth;
+<span class="hljs-keyword">var</span> accessTokenUrl = <span class="hljs-string">'http://api.7digital.com/1.2/oauth/accesstoken'</span>;
+<span class="hljs-keyword">var</span> responseParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./responseparser'</span>);</pre></div>
+        
+      
+        
+        <p>Creates an OAuth v1 wrapper configured with the supplied key and
+secret and the necessary options for authenticating with the
+7digital API.</p>
+<ul>
+<li>@param {String} oauthkey</li>
+<li><p>@param {String} oauthsecret</p>
+</li>
+<li><p>@return {OAuth}</p>
+</li>
+</ul>
+
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createOAuthWrapper</span><span class="hljs-params">(oauthkey,
+	oauthsecret, headers)</span> </span>{
+
+	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> OAuthClient(
+				<span class="hljs-string">'https://api.7digital.com/1.2/oauth/requesttoken'</span>,
+				accessTokenUrl,
+				oauthkey, oauthsecret, <span class="hljs-string">'1.0'</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">'HMAC-SHA1'</span>, <span class="hljs-number">32</span>, headers);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">OAuth</span><span class="hljs-params">(options)</span> </span>{
+	<span class="hljs-keyword">this</span>.consumerkey = options.consumerkey;
+	<span class="hljs-keyword">this</span>.consumersecret = options.consumersecret;
+	<span class="hljs-keyword">this</span>.client = createOAuthWrapper(options.consumerkey,
+		options.consumersecret);
+}</pre></div>
+        
+      
+        
+        <p>Gets a request token from the 7digital API and generates an authorise
+url for the user to grant the application access to their locker and
+make purchases on their behalf.</p>
+<pre><code><span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'7digital-api'</span>).configure({
+        consumerkey: <span class="hljs-string">'YOUR_KEY_HERE'</span>,
+        consumersecret: <span class="hljs-string">'YOUR_SECRET'</span>,
+        defaultParams: {
+             country: <span class="hljs-string">'fr'</span>
+        }
+});
+<span class="hljs-keyword">var</span> oAuth = <span class="hljs-keyword">new</span> api.OAuth();
+oAuth.getRequestToken(<span class="hljs-string">'http://acme.com/oauth_cb'</span>, authorise);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">authorise</span><span class="hljs-params">(err, requestToken, requestSecret, authoriseUrl)</span> </span>{
+         <span class="hljs-comment">// Get an access token</span>
+});
+</code></pre><ul>
+<li>@param {String} cbUrl</li>
+<li>@param {Function} callback</li>
+</ul>
+
+        
+          <div class='highlight'><pre>OAuth.prototype.getRequestToken = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getRequestToken</span><span class="hljs-params">(cbUrl, callback)</span> </span>{
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.defaultParams.country) {
+		<span class="hljs-keyword">this</span>.client.getOAuthRequestToken({
+			country: <span class="hljs-keyword">this</span>.defaultParams.country
+		}, buildAuthoriseUrl.bind(<span class="hljs-keyword">this</span>));
+	} <span class="hljs-keyword">else</span> {
+		<span class="hljs-keyword">this</span>.client.getOAuthRequestToken(buildAuthoriseUrl.bind(<span class="hljs-keyword">this</span>));
+	}
+	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">buildAuthoriseUrl</span><span class="hljs-params">(err, requestToken, requestSecret, results)</span> </span>{
+		<span class="hljs-keyword">var</span> authoriseUrl;
+
+		<span class="hljs-keyword">if</span> (err) {
+			callback(err);
+			<span class="hljs-keyword">return</span>;
+		}
+
+		<span class="hljs-comment">/* jshint validthis: true */</span>
+		authoriseUrl = <span class="hljs-string">'https://account.7digital.com/'</span> +
+						<span class="hljs-keyword">this</span>.consumerkey + <span class="hljs-string">'/oauth/authorise?'</span> +
+					<span class="hljs-string">'oauth_token='</span> + requestToken + <span class="hljs-string">'&amp;oauth_callback='</span> +
+					<span class="hljs-built_in">encodeURIComponent</span>(cbUrl);
+
+		<span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, requestToken, requestSecret, authoriseUrl);
+	}
+};</pre></div>
+        
+      
+        
+        <p>Authorises a request token from the 7digital API for consumers who have
+access to the user management API.  If there is no error the requesttoken
+may be used to gain an access token using <code>getAccessToken</code>.</p>
+<ul>
+<li>@param {Object} requestData</li>
+<li>@param {Function} callback</li>
+</ul>
+<p>The requestData parameter should contain the following</p>
+<ul>
+<li><code>username</code> the email address of the user</li>
+<li><code>password</code> the password for the user’s account</li>
+<li><code>token</code> the request token received from <code>getRequestToken</code></li>
+</ul>
+
+        
+          <div class='highlight'><pre>OAuth.prototype.authoriseRequestToken = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">authoriseRequestToken</span><span class="hljs-params">(
+	requestData, callback)</span> </span>{
+
+	<span class="hljs-keyword">var</span> url = <span class="hljs-string">'https://api.7digital.com/1.2/oauth/requestToken/authorise?'</span>;
+	<span class="hljs-keyword">var</span> fullUrl;
+
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.country) {
+		requestData.country = <span class="hljs-keyword">this</span>.defaultParams.country;
+	}
+
+	fullUrl = url + qs.stringify(requestData);
+
+	<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.client.get(fullUrl, <span class="hljs-literal">null</span>, <span class="hljs-literal">null</span>, checkResponse.bind(<span class="hljs-keyword">this</span>));
+	<span class="hljs-comment">/* jshint validthis: true */</span>
+	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkResponse</span><span class="hljs-params">(err, data)</span> </span>{
+		<span class="hljs-keyword">if</span> (err) {
+			<span class="hljs-keyword">return</span> callback(err);
+		}
+
+		responseParser.parse(data,
+			{ format: <span class="hljs-keyword">this</span>.format, logger: <span class="hljs-keyword">this</span>.logger }, getTokens);
+		<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getTokens</span><span class="hljs-params">(err, tokenResponse)</span> </span>{
+			<span class="hljs-keyword">var</span> accessToken, accessSecret;
+
+			<span class="hljs-keyword">if</span> (err) {
+				<span class="hljs-keyword">return</span> callback(err);
+			}
+
+			<span class="hljs-keyword">return</span> callback();
+		}
+	}
+};</pre></div>
+        
+      
+        
+        <p>Gets an access token from the 7digital API for signing requests to
+access a user’s 7digital account on their behalf.</p>
+<p>You must generate your access token only after the user has authorised
+the request token.</p>
+<p>You can use this token and secret for signing requests to the 3-legged
+OAuth secured API endpoints.</p>
+<pre><code><span class="hljs-keyword">var</span> api = <span class="hljs-built_in">require</span>(<span class="hljs-string">'7digital-api'</span>).configure({
+        consumerkey: <span class="hljs-string">'YOUR_KEY_HERE'</span>,
+        consumersecret: <span class="hljs-string">'YOUR_SECRET'</span>,
+        defaultParams: {
+            country: <span class="hljs-string">'us'</span>
+        }
+});
+<span class="hljs-keyword">var</span> oAuth = <span class="hljs-keyword">new</span> api.OAuth();
+oAuth.getAccessToken({
+        requesttoken: <span class="hljs-string">'YOUR_TOKEN_HERE'</span>,
+        requestsecret: <span class="hljs-string">'TOKEN_SECRET_HERE'</span>
+    }, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">accessSignedEndpoints</span><span class="hljs-params">(err, accessToken, accessSecret)</span> </span>{
+        <span class="hljs-comment">// Access the user's locker etc</span>
+});
+</code></pre><ul>
+<li>@param {Object} requestData</li>
+<li>@param {Function} callback</li>
+</ul>
+<p>The requestData parameter should contain the following</p>
+<ul>
+<li><code>requesttoken</code> an authorised OAuth request token</li>
+<li><code>requestsecret</code> the corresponding OAuth request secret</li>
+</ul>
+
+        
+          <div class='highlight'><pre>OAuth.prototype.getAccessToken = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getAccessToken</span><span class="hljs-params">(requestData,
+	callback)</span> </span>{
+
+	<span class="hljs-keyword">var</span> extraParams = <span class="hljs-literal">null</span>;
+
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.defaultParams.country) {
+		extraParams = { country: <span class="hljs-keyword">this</span>.defaultParams.country };
+	}</pre></div>
+        
+      
+        
+        <p>This must be done manually rather than using the wrapper as there is
+no means of supplying the extra parameter via getOAuthAccessToken</p>
+
+        
+          <div class='highlight'><pre>	<span class="hljs-keyword">this</span>.client._performSecureRequest(requestData.requesttoken,
+		requestData.requestsecret, <span class="hljs-string">'POST'</span>, accessTokenUrl, extraParams, <span class="hljs-literal">null</span>,
+		<span class="hljs-literal">null</span>, checkResponse.bind(<span class="hljs-keyword">this</span>));
+	<span class="hljs-comment">/* jshint validthis: true */</span>
+	<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkResponse</span><span class="hljs-params">(err, data, response)</span> </span>{
+		<span class="hljs-keyword">var</span> results, accessToken, accessSecret;
+
+		<span class="hljs-keyword">if</span> (err) {
+			<span class="hljs-keyword">return</span> callback(err);
+		}</pre></div>
+        
+      
+        
+        <p>Check if we got a for url encoded response</p>
+
+        
+          <div class='highlight'><pre>		<span class="hljs-keyword">if</span> (<span class="hljs-regexp">/oauth_token/</span>.test(data)) {
+			results = <span class="hljs-built_in">require</span>(<span class="hljs-string">'querystring'</span>).parse(data);
+			accessToken= results[<span class="hljs-string">'oauth_token'</span>];
+			accessSecret = results[<span class="hljs-string">'oauth_token_secret'</span>];
+
+			<span class="hljs-keyword">delete</span> results[<span class="hljs-string">'oauth_token'</span>];
+			<span class="hljs-keyword">delete</span> results[<span class="hljs-string">'oauth_token_secret'</span>];
+
+			<span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, accessToken, accessSecret);
+		}</pre></div>
+        
+      
+        
+        <p>We didn’t so parse the body as an XML response</p>
+
+        
+          <div class='highlight'><pre>		responseParser.parse(data,
+			{ format: <span class="hljs-keyword">this</span>.format, logger: <span class="hljs-keyword">this</span>.logger }, getTokens);
+		<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getTokens</span><span class="hljs-params">(err, tokenResponse)</span> </span>{
+			<span class="hljs-keyword">var</span> accessToken, accessSecret;
+
+			<span class="hljs-keyword">if</span> (err) {
+				<span class="hljs-keyword">return</span> callback(err);
+			}
+
+			accessToken = tokenResponse.oauth_access_token.oauth_token;
+			accessSecret = tokenResponse.oauth_access_token.oauth_token_secret;
+
+			<span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, accessToken, accessSecret);
+		}
+   }
+};</pre></div>
+        
+      
+        
+        <p>Allows you to sign GET requests manually.  The common case for this
+is to access the media delivery API where you make a signed request
+and receive the media data directly in the reponse.</p>
+<ul>
+<li>@param {String} <code>url</code> The url to sign</li>
+<li>@param {Object} <code>parameters</code> Any query parameters.</li>
+</ul>
+
+        
+          <div class='highlight'><pre>OAuth.prototype.sign = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sign</span><span class="hljs-params">(url, parameters)</span> </span>{
+	<span class="hljs-keyword">var</span> orderedParams, accesstoken, accesssecret;
+	<span class="hljs-keyword">var</span> query = <span class="hljs-string">''</span>;
+	<span class="hljs-keyword">var</span> parsedUrl = <span class="hljs-built_in">require</span>(<span class="hljs-string">'url'</span>).parse(url, <span class="hljs-literal">false</span>);
+
+	parameters = parameters || {};
+	_.defaults(parameters, <span class="hljs-keyword">this</span>.defaultParams);
+
+	accesstoken = parameters.accesstoken || <span class="hljs-literal">null</span>;
+	<span class="hljs-keyword">delete</span> parameters.accesstoken;
+	accesssecret = parameters.accesssecret || <span class="hljs-literal">null</span>;
+	<span class="hljs-keyword">delete</span> parameters.accesssecret;
+
+	orderedParams = <span class="hljs-keyword">this</span>.client._prepareParameters(accesstoken, accesssecret,
+		<span class="hljs-string">'GET'</span>, url, parameters);
+
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; orderedParams.length; i++) {
+		query += orderedParams[i][<span class="hljs-number">0</span>] + <span class="hljs-string">'='</span> +
+			<span class="hljs-keyword">this</span>.client._encodeData(orderedParams[i][<span class="hljs-number">1</span>]) + <span class="hljs-string">'&amp;'</span>;
+	}
+	query = query.substring(<span class="hljs-number">0</span>, query.length - <span class="hljs-number">1</span>);
+
+	<span class="hljs-keyword">return</span> parsedUrl.protocol + <span class="hljs-string">'//'</span>+ parsedUrl.host + parsedUrl.pathname +
+		<span class="hljs-string">'?'</span> + query;
+};
+
+<span class="hljs-built_in">module</span>.exports = exports = {
+	createOAuthWrapper: createOAuthWrapper,
+	OAuth: OAuth
+};</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
