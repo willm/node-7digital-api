@@ -38,6 +38,7 @@
     "jshint": "~2.4.0",
     "mocha": "~1.15.1",
     "mocha-teamcity-reporter": "0.0.4",
+    "proxyquire": "^1.4.0",
     "sinon": "~1.7.3",
     "winston": "^0.8.0"
   },

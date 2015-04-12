@@ -150,10 +150,20 @@ async.waterfall([
 			console.log('updated playlist: ' + name);
 			assert.equal(playlistRes.playlist.name, newName);
 			assert.lengthOf(playlistRes.playlist.tracks, 1);
-			assert.equal(playlistRes.playlist.tracks[0].track.trackTitle, 'The Helicopter Tune');
-			cb(err);
+			assert.equal(playlistRes.playlist.tracks[0].track.trackTitle,
+				'The Helicopter Tune');
+			cb(null, accessToken, accessSecret, playlistId);
 		});
-	}],
+	}, function deletePlaylist(accessToken, accessSecret, playlistId, cb) {
+				playlists.delete({
+					playlistId: playlistId,
+					accesstoken: accessToken,
+					accesssecret: accessSecret
+				}, function (err, res) {
+                    console.log(err, res);
+                    cb(err, res);
+                });
+			}],
 	function (err) {
 		assert.notOk(err);
 	});

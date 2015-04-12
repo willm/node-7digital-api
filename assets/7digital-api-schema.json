@@ -313,6 +313,12 @@
 						{
 							"Content-Type": "application/json"
 						}
+				},
+				{
+				"apiCall": ":playlistId",
+					"methodName": "delete",
+					"oauth": "3-legged",
+					"method": "DELETE"
 				}
 			]
 		}
